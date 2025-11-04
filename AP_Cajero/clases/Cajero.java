@@ -35,33 +35,21 @@ public class Cajero{
 
     public static String totalDeBilletesYMondeas(double cantidad){
         //500, 200, 100, 50, 20 para billetes y 10, 5, 2 y 1 para monedas
-        double resto = 0;
-        double cant500 = Math.floor(cantidad/500);
-        resto = cantidad % 500;
-        double cant200 = Math.floor(resto/200);
-        resto = cantidad % 200;
-        double cant100 = Math.floor(resto/100);
-        resto = cantidad % 100;
-        double cant50 = Math.floor(resto/50);
-        resto = cantidad % 50;
-        double cant20 = Math.floor(resto/20);
-        resto = cantidad % 20;
-        double cant10 = Math.floor(resto/10);
-        resto = cantidad % 5;
-        double cant5 = Math.floor(resto/5);
-        resto = cantidad % 2;
-        double cant2 = Math.floor(resto/2);
-        double cant1 = resto;
-
-        return(cant500+"billetes de 500, \n" 
-                            + cant200 + "billetes de 200, \n"
-                            + cant100 + "billete de 100, \n"
-                            + cant50 + "billetes de 50, \n" 
-                            + cant20 +"moneda de 20, \n"
-                            + cant10 + "monedas de 10\n"
-                            + cant5 + "monedas de 5\n"
-                            + cant2 + "monedas de 2\n"
-                            + cant1 + "monedas de 1");
+        int[] denominacion = {500,200,100,50,20,10,5,2,1};
+        double resto = cantidad;
+        int cant=0;
+        String resultado = "";
+        for(int i = 0; i< denominacion.length; i++){
+            cant=(int) Math.floor(Math.floor(resto/denominacion[i]));
+            resto = resto%denominacion[i];
+            if(cant != 0 && denominacion[i]>=20){
+                resultado= resultado.concat(cant +" billetes de " + denominacion[i]+", \n");
+            }
+            if(cant!=0 && denominacion[i]<20){
+                resultado= resultado.concat(cant +" monedas de " + denominacion[i]+" , \n");
+            }
+        }
+        return resultado;
     }
 
 
