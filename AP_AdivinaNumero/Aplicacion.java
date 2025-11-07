@@ -1,5 +1,3 @@
-import java.util.Random;
-
 import clases.AdivinaNumero;
 
 public class Aplicacion {
@@ -13,7 +11,5 @@ public class Aplicacion {
             System.out.println(AdivinaNumero.compararNumeros(num, aleatorio));
         }while(num != aleatorio);
      
-
-
    }
 }
