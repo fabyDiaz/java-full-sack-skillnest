@@ -10,16 +10,19 @@
     </head>
     <body>
 
-         <h1>Lista de países</h1>
+    
+        <c:if test="${not empty mensaje}">
+            <p>${mensaje}</p>
+        </c:if>
+
+        <c:if test="${not empty pais}">
+            <h1>Capital de ${pais}</h1>
 
             <div>
-                <ul>
-                    <c:forEach var="pais" items="${listaPaises.keySet()}">
-                        <li>   
-                            <a href = "/paises/${pais}"><c:out value = "${pais}"/></a>
-                        </li>
-                     </c:forEach>
-                   </ul>
+                <p>${capital}</p>
             </div>
+        </c:if>
+
+       
     </body>
 </html>
