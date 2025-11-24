@@ -1,4 +1,5 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java"%>
+<%@ taglib prefix="form" uri="http://www.springframework.org/tags/form"%>
 
 <!DOCTYPE html>
 <html>
@@ -9,24 +10,31 @@
     </head>
     <body>
         <h1>Agregar Videojuego:</h1>
-        <form action="/add" method="POST">
-            <label for="nombre">Nombre:</label>
-            <input type="text" name="nombre">
+        <form:form action="/add" method="POST" modelAttribute="videojuego">
 
-            <label for="descripcion">Descripción:</label>
-            <textarea name="descripcion"></textarea>
+    <form:label path="nombre">Nombre:</form:label>
+    <form:input type="text" path="nombre"/>
+    <form:errors path="nombre"/>
 
-            <label for="portada">Portada:</label>
-            <input type="url" name="portada">
+    <form:label path="descripcion">Descripción:</form:label>
+    <form:textarea path="descripcion"/>
+    <form:errors path="descripcion"/>
 
-            <label for="fecha_lanzamiento">Fecha Lanzamiento:</label>
-            <input type="date" name="fecha_lanzamiento">
+    <form:label path="portada">Portada:</form:label>
+    <form:input type="url" path="portada"/>
+    <form:errors path="portada"/>
 
-            <label for="rating">Rating:</label>
-            <input type="number" name="rating" min="0" max="5" step="0.5">
+    <form:label path="fecha_lanzamiento">Fecha Lanzamiento:</form:label>
+    <form:input type="date" path="fecha_lanzamiento"/>
+    <form:errors path="fecha_lanzamiento"/>
 
-            <input type="submit" value="Crear">
-        </form> 
+    <form:label path="raiting">Rating:</form:label>
+    <form:input type="number" path="raiting" min="0" max="5" step="0.5"/>
+    <form:errors path="raiting"/>
+
+    <input type="submit" value="Crear"/>
+</form:form>
+
         <a href="/getAll">Volver</a>
     </body>
 </html>
