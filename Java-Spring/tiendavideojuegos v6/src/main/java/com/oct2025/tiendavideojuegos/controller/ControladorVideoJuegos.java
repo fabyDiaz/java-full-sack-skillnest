@@ -1,6 +1,8 @@
 package com.oct2025.tiendavideojuegos.controller;
 import com.oct2025.tiendavideojuegos.Interfaces.ManejoDeFechas;
+import com.oct2025.tiendavideojuegos.Service.ServicioResena;
 import com.oct2025.tiendavideojuegos.Service.ServicioVideojuego;
+import com.oct2025.tiendavideojuegos.models.Resena;
 import com.oct2025.tiendavideojuegos.models.Usuario;
 import com.oct2025.tiendavideojuegos.models.VideoJuego;
 
@@ -24,6 +26,9 @@ public class ControladorVideoJuegos implements ManejoDeFechas{
 
     @Autowired
     private ServicioVideojuego servicioVideojuego;
+
+    @Autowired
+    private ServicioResena servicioResena;
 
        
     @GetMapping("/getAll")
@@ -70,6 +75,7 @@ public class ControladorVideoJuegos implements ManejoDeFechas{
         }
         VideoJuego juego = this.servicioVideojuego.obtenerPorId(id);
         modelo.addAttribute("videojuego", juego);
+        modelo.addAttribute("resena", new Resena());
         return "detalle.jsp";
     }
 
@@ -105,6 +111,19 @@ public class ControladorVideoJuegos implements ManejoDeFechas{
         }
         this.servicioVideojuego.eliminar(id);
         return "redirect:/getAll";
+    }
+
+    @PostMapping("/comment")
+    public String comentar(@Valid @ModelAttribute("resena") Resena resena, BindingResult validaciones, HttpSession session){
+        Usuario usuario = (Usuario) session.getAttribute("usuario");
+        if (usuario == null) {
+            return "redirect:/";
+        }
+        if(validaciones.hasErrors()){
+            return "editar.jsp";
+        }
+        this.servicioResena.crear(resena);
+        return "redirect:/detail/"+ resena.getVideoJuego().getId();
     }
 
 }
